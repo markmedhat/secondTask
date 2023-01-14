@@ -1,0 +1,34 @@
+package tests;
+
+import java.time.Duration;
+
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Test;
+
+import pages.HomePage;
+
+public class TaskTwo_firstScenario_SelectASeat_Then_Payment_Test extends TestBase {
+	HomePage homepage;
+
+  @Test
+  public void TaskTwo_firstScenario_SelectASeat_Then_Payment() {
+	  
+	  	homepage = new HomePage
+	  
+		// - Choose the following ((from "CHIKKAMAGALURU" to "BENGALURU”)) from the
+		homepage.sendKeys(homepage.leavingFrom, "CHIKKAMAGALURU");
+		homepage.Take_List_String_To_Select_An_Item(homepage.select_leavingFromList, "CHIKKAMAGALURU");
+		homepage.wait_Till_elment_be_clickcable_THEN_click(homepage.select_leavingFromItem);
+		homepage.Take_List_String_To_Select_An_Item(homepage.select_leavingToList, "BENGALURU");
+
+		// - Choose the arrival date only
+		homepage.clikOnItem(homepage.arrivalDate);
+		homepage.Take_List_String_To_Select_An_Item(homepage.dates, "19");
+
+		// - Click “Search for bus”
+		homepage.clikOnItem(homepage.SearchForBus);
+		
+
+	  
+  }
+}

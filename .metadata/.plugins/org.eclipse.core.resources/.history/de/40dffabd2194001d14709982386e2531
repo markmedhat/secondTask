@@ -1,0 +1,134 @@
+package tests;
+
+import java.time.Duration;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Test;
+
+import pages.HomePage;
+import pages.Select_A_seat_Page;
+
+public class TaskTwo_firstScenario_SelectASeat_Then_Payment_Test extends TestBase {
+	HomePage homepage;
+	Select_A_seat_Page selectAseatPage;
+
+
+  @Test
+  public void TaskTwo_firstScenario_SelectASeat_Then_Payment() {
+	  
+	  	homepage = new HomePage(driver);
+		selectAseatPage=new Select_A_seat_Page(driver);
+
+	  
+		// - Choose the following ((from "CHIKKAMAGALURU" to "BENGALURU”)) from the
+		homepage.sendKeys(homepage.leavingFrom, "CHIKKAMAGALURU");
+		homepage.Take_List_String_To_Select_An_Item(homepage.select_leavingFromList, "CHIKKAMAGALURU");
+		homepage.wait_Till_elment_be_clickcable_THEN_click(homepage.select_leavingFromItem);
+		homepage.Take_List_String_To_Select_An_Item(homepage.select_leavingToList, "BENGALURU");
+
+		// - Choose the arrival date only
+		homepage.clikOnItem(homepage.arrivalDate);
+		homepage.Take_List_String_To_Select_An_Item(homepage.dates, "19");
+
+		// - Click “Search for bus”
+		homepage.clikOnItem(homepage.SearchForBus);
+		
+		selectAseatPage.wait_Till_elment_be_Visible(selectAseatPage.filter);
+		// select a seat
+//		WebElement selectSeat = driver.findElement(By.xpath(
+//				("/html/body/main/form/section/div/div[6]/div[3]/div/div/div[2]/div[1]/div[1]/div[3]/div/input[4]")));
+//		wait.until(ExpectedConditions.elementToBeClickable(selectSeat));
+//		selectSeat.click();
+	
+		selectAseatPage.wait_Till_elment_be_clickcable_THEN_click(selectAseatPage.selectSeat);
+		
+		// wait till make sure the next view be there
+
+//		WebElement clickOnSeat = driver.findElement(By.xpath(
+//				"/html/body/main/form/section/div/div[6]/div[3]/div/div/div[2]/div[4]/div/table/tbody/tr/td/div/div[1]/div[1]/div/h6"));
+//		wait.until(ExpectedConditions.visibilityOf(clickOnSeat));
+		
+		selectAseatPage.wait_Till_elment_be_Visible(selectAseatPage.clickOnSeat);
+		
+		// - Choose the boarding point and dropping point
+
+		// Choose the boarding point
+//		WebElement boardingPointTab = driver.findElement(By.id("Forwardboarding-tab"));
+//		wait.until(ExpectedConditions.elementToBeClickable(boardingPointTab));
+//		boardingPointTab.click();
+
+		selectAseatPage.wait_Till_elment_be_clickcable_THEN_click(selectAseatPage.boardingPointTab);
+		
+//		List<WebElement> boardingPointList = driver.findElements(By.xpath(
+//				"/html/body/main/form/section/div/div[6]/div[3]/div/div/div[2]/div[4]/div/table/tbody/tr/td/div/div[1]/div[2]/div[2]/div/div[2]/div/div[1]/div/div/ul/li"));
+
+//		Take_Drive_List_String_To_Select_An_Item_contains_Text(boardingPointList, "CHIKKAMAGALURU");
+
+		selectAseatPage.Take_List_And_String_To_Select_An_Item_contains_Text(selectAseatPage.boardingPointList, "CHIKKAMAGALURU");
+		// Choose the dropping point
+
+//		List<WebElement> droppingPointList = driver.findElements(By.xpath(
+//				"/html/body/main/form/section/div/div[6]/div[3]/div/div/div[2]/div[4]/div/table/tbody/tr/td/div/div[1]/div[2]/div[2]/div/div[2]/div/div[2]/div/div/ul/li"));
+
+//		Take_Drive_List_String_To_Select_An_Item_contains_Text(droppingPointList, "BENGALURU");
+	
+		selectAseatPage.Take_List_And_String_To_Select_An_Item_contains_Text(selectAseatPage.droppingPointList, "BENGALURU");
+
+		// - Fill the “Customer” and “Passenger” details (Note: you can use this phone
+		// number: 6789125987)
+		WebElement mobPhone = driver.findElement(By.id("mobileNo"));
+		mobPhone.sendKeys("6789125987");
+		WebElement email = driver.findElement(By.id("email"));
+		email.sendKeys("test@test.com");
+		// choose a seat to can enter the passenger data
+		List<WebElement> seatList = driver.findElements(By.xpath(
+				"/html/body/main/form/section/div/div[6]/div[3]/div/div/div[2]/div[4]/div/table/tbody/tr/td/div/div[1]/div[2]/div[1]/div/div[1]/div/div/div/ul/li"));
+		Select_A_Seat(seatList);
+
+		// fill passenger details
+//		WebElement passengerDetails = driver.findElement(By.xpath(
+//				"/html/body/main/form/section/div/div[6]/div[3]/div/div/div[2]/div[4]/div/table/tbody/tr/td/div/div[1]/div[2]/div[3]/div/p/a"));
+//		passengerDetails.click();
+
+		selectAseatPage.clikOnItem(selectAseatPage.passengerDetails);
+		
+		
+//		WebElement passengerName = driver.findElement(By.xpath("//*[contains(@id,'passengerNameForward')]"));
+//		passengerName.sendKeys("test");
+
+		selectAseatPage.sendText(selectAseatPage.passengerName, "test");
+		
+//		Select passengerGender = new Select(driver.findElement(By.xpath("//*[contains(@id,'genderCodeIdForward')]")));
+//		passengerGender.selectByVisibleText("MALE");
+
+		selectAseatPage.selectAnItemFromSelectList(selectAseatPage.passengerGender, "MALE");
+		
+//		WebElement passengerAge = driver.findElement(By.xpath("//*[contains(@id,'passengerAgeForward')]"));
+//		passengerAge.sendKeys("29");
+
+		selectAseatPage.sendText(selectAseatPage.passengerAge,"29");
+		
+		
+//		Select selectConsession = new Select(driver.findElement(By.xpath("//*[contains(@id,'concessionIdsForward')]")));
+//		selectConsession.selectByVisibleText("GENERAL PUBLIC");
+
+		selectAseatPage.selectAnItemFromSelectList(selectAseatPage.consession, "GENERAL PUBLIC");
+		
+		
+		// - Click on “make payment” and fill all the fields without submitting the payment
+//		WebElement makePayment = driver.findElement(By.id("PgBtn"));
+//		makePayment.click();
+
+		//click on make payment button 
+
+		selectAseatPage.clikOnItem(selectAseatPage.makePayment);
+		
+
+		
+
+	  
+  }
+}

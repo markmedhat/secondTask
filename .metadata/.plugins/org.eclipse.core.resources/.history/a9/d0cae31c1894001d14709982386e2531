@@ -1,0 +1,52 @@
+package pages;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class HomePage extends PageBase {
+
+	public HomePage(WebDriver driver) {
+		super(driver);
+	}
+
+	public void openURL(String URL) {
+		driver.get(URL);
+	}
+
+	// elements
+	@FindBy(id = "fromPlaceName")
+	public WebElement leavingFrom;
+
+	@FindBy(xpath = "/html/body/ul[1]/li")
+	List<WebElement> select_leavingFromList ;
+
+	
+	
+	
+	// methods
+	public void sendKeys(WebElement element, String text) {
+		element.sendKeys(text);
+	}
+	
+	public void clikOnItem(WebElement element)
+	{
+		element.click();
+	}
+	
+	public void Take_List_String_To_Select_An_Item(List<WebElement> list, String text) {
+
+		int sizeOfList = list.size();
+		for (int i = 0; i < sizeOfList; i++) {
+			if (list.get(i).getText().equalsIgnoreCase(text)) {
+				clikOnItem(list.get(i));
+				break;
+			}
+		}
+
+	}
+
+}

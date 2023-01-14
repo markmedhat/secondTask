@@ -1,0 +1,11 @@
+package pages;
+
+import org.openqa.selenium.WebDriver;
+
+public class Select_A_seast extends PageBase {
+
+	public Select_A_seast(WebDriver driver) {
+		super(driver);
+	}
+
+}

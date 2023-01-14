@@ -1,0 +1,64 @@
+package tests;
+
+import java.time.Duration;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Test;
+
+import pages.HomePage;
+import pages.Select_A_seat_Page;
+
+public class TaskTwo_firstScenario_SelectASeat_Then_Payment_Test extends TestBase {
+	HomePage homepage;
+	Select_A_seat_Page selectAseatPage;
+
+	@Test
+	public void TaskTwo_firstScenario_SelectASeat_Then_Payment() {
+		homepage = new HomePage(driver);
+		selectAseatPage = new Select_A_seat_Page(driver);
+		// - Choose the following ((from "CHIKKAMAGALURU" to "BENGALURU”)) from the
+		homepage.sendKeys(homepage.leavingFrom, "CHIKKAMAGALURU");
+		homepage.Take_List_String_To_Select_An_Item(homepage.select_leavingFromList, "CHIKKAMAGALURU");
+		homepage.wait_Till_elment_be_clickcable_THEN_click(homepage.select_leavingFromItem);
+		homepage.Take_List_String_To_Select_An_Item(homepage.select_leavingToList, "BENGALURU");
+		// - Choose the arrival date only
+		homepage.clikOnItem(homepage.arrivalDate);
+		homepage.Take_List_String_To_Select_An_Item(homepage.dates, "19");
+		// - Click “Search for bus”
+		homepage.clikOnItem(homepage.SearchForBus);
+		selectAseatPage.wait_Till_elment_be_Visible(selectAseatPage.filter);
+		// - Select a seat steps
+		// wait till make sure the search result be there
+		selectAseatPage.wait_Till_elment_be_Visible(selectAseatPage.filter);
+		// select a seat
+		selectAseatPage.wait_Till_elment_be_clickcable_THEN_click(selectAseatPage.selectSeat);
+		// wait till make sure the next view be there
+		selectAseatPage.wait_Till_elment_be_Visible(selectAseatPage.clickOnSeat);
+		// - Choose the boarding point and dropping point
+		// Choose the boarding point
+		selectAseatPage.wait_Till_elment_be_clickcable_THEN_click(selectAseatPage.boardingPointTab);
+		selectAseatPage.Take_List_And_String_To_Select_An_Item_contains_Text(selectAseatPage.boardingPointList,
+				"CHIKKAMAGALURU");
+		// Choose the dropping point
+		selectAseatPage.Take_List_And_String_To_Select_An_Item_contains_Text(selectAseatPage.droppingPointList,
+				"BENGALURU");
+		selectAseatPage.sendText(selectAseatPage.mobPhone, "6789125987");
+		selectAseatPage.sendText(selectAseatPage.email, "test@test.com");
+		// choose a seat to can enter the passenger data
+		selectAseatPage.Select_A_Seat(selectAseatPage.seatList);
+		// fill passenger details
+		selectAseatPage.clikOnItem(selectAseatPage.passengerDetails);
+		selectAseatPage.sendText(selectAseatPage.passengerName, "test");
+		selectAseatPage.selectAnItemFromSelectList(selectAseatPage.passengerGender, "MALE");
+		selectAseatPage.sendText(selectAseatPage.passengerAge, "29");
+		selectAseatPage.selectAnItemFromSelectList(selectAseatPage.consession, "GENERAL PUBLIC");
+		// - Click on “make payment” and fill all the fields without submitting the
+		// payment
+		// click on make payment button
+		selectAseatPage.clikOnItem(selectAseatPage.makePayment);
+
+	}
+}
